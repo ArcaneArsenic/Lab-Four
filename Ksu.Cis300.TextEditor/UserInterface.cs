@@ -44,9 +44,12 @@ namespace Ksu.Cis300.TextEditor
 
         private char Encrypt(char letter)
         {
-            if (letter <= 'z') { return Rotate(letter, 13, 'a', 26); }
-            else if (letter > 'z') { return Rotate(letter, 13, 'A', 26); }
-            else { return letter; }
+            if (letter == ' ' || letter == '.') { return letter; }
+            else if (letter <= 'z') { return Rotate(letter, 13, 'a', 26); }
+            else
+            {
+                return letter >= 'z' ? Rotate(letter, 13, 'A', 26) : letter;
+            }
         }
 
         /// <summary>
@@ -109,14 +112,15 @@ namespace Ksu.Cis300.TextEditor
             uxEditBuffer.Text = result;
         }
 
-        private void uxStringBuilderTSMI_Click(object sender, EventArgs e)
+        private void UxStringBuilderTSMI_Click(object sender, EventArgs e)
         {
             StringBuilder result = new StringBuilder();
 
             foreach (char x in uxEditBuffer.Text)
             {
                 result.Append(x);
-            uxEditBuffer.Text = Convert.ToString(result);
+                uxEditBuffer.Text = Convert.ToString(result);
+            }
         }
     }
 }
